@@ -12,6 +12,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
+        <service
+            android:name=".service.EmergencyService"
+            android:exported="false"/>
+
         <activity
             android:name=".splashScreen.SplashActivity"
             android:theme="@style/SplashTheme"
