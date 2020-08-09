@@ -37,7 +37,7 @@ class EmergencyService : Service() {
         }
         val path = "android.resource://$packageName/$alarmSound"
         val mp = MediaPlayer.create(this, Uri.parse(path))
-        duration = mp.duration / 100 + 1500.toLong()
+        duration = mp.duration / 100 * 2 + 1000.toLong()
         if (alarmMode == 2) {
             alarmSound = R.raw.alarm_2
         } else if (alarmMode == 3) {
@@ -64,7 +64,7 @@ class EmergencyService : Service() {
                     }
                     mHandler.postDelayed(runnable!!, duration)
                 }
-                mHandler.postDelayed(runnable!!, duration)
+                mHandler.postDelayed(runnable!!, 0)
             }
         }
     }

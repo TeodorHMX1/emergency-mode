@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val emergencyMode = Intent(this, EmergencyService::class.java)
-        emergencyMode.putExtra("alarm", 2)
+        emergencyMode.putExtra("alarm", 3)
         startService(emergencyMode)
 
     }
