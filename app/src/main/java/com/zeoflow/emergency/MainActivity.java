@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Intent emergencyMode = new Intent(this, EmergencyService.class);
-        emergencyMode.putExtra("alarm", 3);
+        emergencyMode.putExtra("alarm", 1);
         startService(emergencyMode);
 
     }

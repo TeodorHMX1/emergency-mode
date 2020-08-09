@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
-import android.util.Log;
 
 import com.zeoflow.emergency.R;
 
@@ -25,11 +24,12 @@ public class EmergencyService extends Service
         return null;
     }
 
-    int sound;
+    private int sound;
     private SoundPool soundPool;
-    float volume = 0.01f;
+    private float volume = 0.01f;
     private Runnable runnable;
     private int alarmMode = 1;
+    private long duration;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -38,16 +38,6 @@ public class EmergencyService extends Service
         {
             alarmMode = intent.getExtras().getInt("alarm");
         }
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Override
-    public void onCreate()
-    {
-
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(1)
-                .build();
 
         int alarmSound = R.raw.alarm_1;
         if (alarmMode == 2)
@@ -59,9 +49,26 @@ public class EmergencyService extends Service
         }
         String path = "android.resource://" + getPackageName() + "/" + alarmSound;
         MediaPlayer mp = MediaPlayer.create(this, Uri.parse(path));
-        long duration = mp.getDuration() / 100 + 1000;
+        duration = mp.getDuration() / 100 + 1000;
 
+        if (alarmMode == 2)
+        {
+            alarmSound = R.raw.alarm_2;
+        } else if (alarmMode == 3)
+        {
+            alarmSound = R.raw.alarm_3;
+        }
         sound = soundPool.load(this, alarmSound, 1);
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onCreate()
+    {
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(1)
+                .build();
 
         soundPool.setOnLoadCompleteListener((soundPool, soundID, i1) ->
         {
