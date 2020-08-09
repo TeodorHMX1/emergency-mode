@@ -37,10 +37,12 @@ class EmergencyService : Service() {
         }
         val path = "android.resource://$packageName/$alarmSound"
         val mp = MediaPlayer.create(this, Uri.parse(path))
-        duration = mp.duration / 100 * 2 + 1000.toLong()
+        duration = mp.duration / 100 * 2 + 4000.toLong()
         if (alarmMode == 2) {
+            duration = mp.duration / 100 * 2 + 5000.toLong()
             alarmSound = R.raw.alarm_2
         } else if (alarmMode == 3) {
+            duration = mp.duration / 100 * 2 + 5000.toLong()
             alarmSound = R.raw.alarm_3
         }
         sound = soundPool!!.load(this, alarmSound, 1)
@@ -58,9 +60,12 @@ class EmergencyService : Service() {
                 runnable = Runnable {
                     val audioManager = applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                     audioManager.setStreamVolume(STREAM_MUSIC, audioManager.getStreamMaxVolume(STREAM_MUSIC), 0)
-                    soundPool.play(sound, volume, volume, 0, 0, 1f)
                     if (volume < 1f) {
+                        soundPool.play(sound, volume, volume, 0, 0, 1f)
                         volume += 0.005f
+                    } else {
+                        soundPool.play(sound, volume, volume, 0, 0, 1f)
+                        soundPool.play(sound, volume, volume, 0, 0, 1f)
                     }
                     mHandler.postDelayed(runnable!!, duration)
                 }
