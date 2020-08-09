@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.util.Log;
 
 import com.zeoflow.emergency.R;
 
@@ -60,7 +61,7 @@ public class EmergencyService extends Service
         MediaPlayer mp = MediaPlayer.create(this, Uri.parse(path));
         long duration = mp.getDuration() / 100 + 1000;
 
-        sound = soundPool.load(this, R.raw.alarm_1, 1);
+        sound = soundPool.load(this, alarmSound, 1);
 
         soundPool.setOnLoadCompleteListener((soundPool, soundID, i1) ->
         {
