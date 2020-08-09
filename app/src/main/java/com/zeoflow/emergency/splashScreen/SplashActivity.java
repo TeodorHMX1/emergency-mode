@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zeoflow.home.HomeActivity;
+import com.zeoflow.emergency.MainActivity;
 
 public class SplashActivity extends AppCompatActivity
 {
