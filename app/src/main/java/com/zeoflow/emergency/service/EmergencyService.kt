@@ -37,10 +37,12 @@ class EmergencyService : Service() {
         }
         val path = "android.resource://$packageName/$alarmSound"
         val mp = MediaPlayer.create(this, Uri.parse(path))
-        duration = mp.duration / 100 * 2 + 3500.toLong()
+        duration = mp.duration / 100 * 2 + 4000.toLong()
         if (alarmMode == 2) {
+            duration = mp.duration / 100 * 2 + 5000.toLong()
             alarmSound = R.raw.alarm_2
         } else if (alarmMode == 3) {
+            duration = mp.duration / 100 * 2 + 4500.toLong()
             alarmSound = R.raw.alarm_3
         }
         sound = soundPool!!.load(this, alarmSound, 1)
